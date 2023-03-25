@@ -6,18 +6,19 @@ import io.ktor.server.request.*
 import io.ktor.server.metrics.dropwizard.*
 import com.codahale.metrics.*
 import io.ktor.server.application.*
+import java.util.concurrent.TimeUnit
 
 fun Application.configureMonitoring() {
     install(CallLogging) {
         level = Level.INFO
         filter { call -> call.request.path().startsWith("/") }
     }
-    install(DropwizardMetrics) {
-        Slf4jReporter.forRegistry(registry)
-            .outputTo(this@module.log)
-            .convertRatesTo(TimeUnit.SECONDS)
-            .convertDurationsTo(TimeUnit.MILLISECONDS)
-            .build()
-            .start(10, TimeUnit.SECONDS)
-    }
+//    install(DropwizardMetrics) {
+//        Slf4jReporter.forRegistry(registry)
+//            .outputTo(this@module.log)
+//            .convertRatesTo(TimeUnit.SECONDS)
+//            .convertDurationsTo(TimeUnit.MILLISECONDS)
+//            .build()
+//            .start(10, TimeUnit.SECONDS)
+//    }
 }
